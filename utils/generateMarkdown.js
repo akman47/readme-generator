@@ -16,7 +16,7 @@ function renderLicenseLink(license) {
   if (!license) {
     return "";
   }
-  
+
 }
 
 // TODO: Create a function that returns the license section of README
@@ -41,13 +41,13 @@ function generateMarkdown(data) {
 
           ## License
 
-          ## Contributing
+          ## Contribution Guidelines
 
           ## Tests
 
           ## Questions
           Visit my GitHub profile for more information: ${gitHubLink}
-          You can reach me at ${email} with any additional questions
+          If you have any questions, email me at ${email}
 
 `;
 }

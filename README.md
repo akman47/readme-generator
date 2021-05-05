@@ -1,7 +1,17 @@
 # README Generator
 
 ## Description
-An application that dynamically generates a professional README.md from user input collected via the command line
+A Node application that dynamically generates a professional README.md from user input collected via the command line
+
+<h3>Information included in the README.md:
+* Description
+* Table of Contents
+* Installation
+* Usage
+* License
+* Contribution Guidelines
+* How to Test
+* Questions
 
 ## User Story
 As a developer, I want a README generator so that I can quickly create a professionl README for a new project
@@ -20,10 +30,15 @@ As a developer, I want a README generator so that I can quickly create a profess
 ![Screen recording of how to use the application](./assets/images/readme-generator-demo.gif)
 * Walkthrough Link: 
 
-## Installation
-* Clone readme generator repository
-* Run npm install in command line
-* Run node index.js in command line
+## Usage
+1. Clone readme generator repository
+2. Run <code>npm install</code> to install dependencies
+3. Run <code>node index</code> to run the app
+4. Answer prompts and check out your new README file!
+
+## Packages
+* Inquirer
+
 
 ## Criteria
 * GIVEN a command-line application that accepts user input
