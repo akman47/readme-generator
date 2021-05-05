@@ -31,7 +31,12 @@ function generateMarkdown(data) {
           ${data.description}
 
           ## Table of Contents
-          ${data.tableOfContents}
+          - [Installation](#installation)
+          - [Usage](#usage)
+          - [License](#license)
+          - [Contributing](#contributing)
+          - [Tests](#tests)
+          - [Questions](#questions)
 
           ## Installation
           ${data.installation}
@@ -40,15 +45,16 @@ function generateMarkdown(data) {
           ${data.usage}
 
           ## License
+          This application is covered under ${data.license}
 
-          ## Contribution Guidelines
+          ## Contributing
+          ${data.contribution}
 
           ## Tests
+          ${data.tests}
 
           ## Questions
-          Visit my GitHub profile for more information: ${gitHubLink}
-          If you have any questions, email me at ${email}
-
+          If you have any questions, email the developer at ${data.email} or [visit their GitHub profile for more information](https://github.com/${data.github})
 `;
 }
 
