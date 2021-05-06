@@ -3,7 +3,7 @@
 ## Description
 A Node application that dynamically generates a professional README.md from user input collected via the command line
 
-<h3>Information included in the README.md:
+__Information included in the README.md:__
 * Description
 * Table of Contents
 * Installation
@@ -19,8 +19,6 @@ As a developer, I want a README generator so that I can quickly create a profess
 ## Made with
 * Node.js
 * JavaScript
-* HTML
-* CSS
 
 ## Snapshot
 ![Snapshot of the terminal prompts for user input](./assets/images/command-prompts.png)
