@@ -6,7 +6,7 @@ function renderLicenseBadge(license) {
   }
   // add license badge to top of readme
   return `
-  
+    ${license.badge}
   `;
 }
 
@@ -17,11 +17,25 @@ function renderLicenseLink(license) {
     return "";
   }
 
+  return `
+  Please refer to ${license.link} for the full terms.
+  `
 }
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
-function renderLicenseSection(license) {}
+function renderLicenseSection(license) {
+  if (!license) {
+    return "";
+  }
+
+  return `
+    ## License
+    ${renderLicenseBadge}
+    This application is licensed under the terms of the ${data.license} open source license.
+    ${renderLicenseLink}
+  `
+}
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
@@ -44,8 +58,7 @@ function generateMarkdown(data) {
           ## Usage
           ${data.usage}
 
-          ## License
-          This application is covered under ${data.license}
+          ${renderLicenseSection}
 
           ## Contributing
           ${data.contribution}
