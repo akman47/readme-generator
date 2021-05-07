@@ -1,6 +1,7 @@
 // TODO: Include packages needed for this application
 const inquirer = require("inquirer");
 const fs = require("fs");
+const fetch = require("node-fetch");
 const generateMarkdown = require("./utils/generateMarkdown.js");
 
 // TODO: Create an array of questions for user input
@@ -39,7 +40,7 @@ const questions = [
     }
 ];
 
-const promptInput = questions.map( field => {
+var promptInput = questions.map( field => {
     return {
             type: "input",
             name: field.inputName,
@@ -57,15 +58,30 @@ const promptInput = questions.map( field => {
     });
 
 // gather license information
-const licensePrompt = 
-    {
-        type: "checkbox",
-        name: "license",
-        message: "Which license(s) apply to the project?",
-        choices: ["",""]
-    };
+const licenseInfo = () => {
+    var apiUrl = "https://api.github.com/licenses";
 
-promptInput.push(licensePrompt);
+    fetch(apiUrl)
+        .then(response => {
+            if (response.ok) {
+                response.json().then(data => {
+                    let licensePrompt = 
+                    {
+                        type: "checkbox",
+                        name: "license",
+                        message: "Which license(s) apply to the project?",
+                        choices: data.map(license => license.name)
+                    }
+                    
+                    //console.log(licensePrompt);
+                    promptInput.push(licensePrompt);
+                    //console.log(promptInput);
+                })
+            }
+        })
+}
+
+//promptInput.push(licensePrompt);
 
 const fileName = data => "./dist/" + data.title + "_README.md"
 
@@ -96,8 +112,8 @@ function init() {
     );
     // start question prompt
     return inquirer.prompt (promptInput).then(answers =>(console.log(answers)));
-
 }
 
 // Function call to initialize app
+licenseInfo();
 init();
