@@ -15,11 +15,11 @@ const questions = [
     },
     {
         inputName: "installation",
-        inputMessage: "Provide the steps required to install the proejct."
+        inputMessage: "Provide the steps required to install the project."
     },
     {
         inputName: "usage",
-        inputMessage: "Provide instructions and examples for use."
+        inputMessage: "Provide instructions and examples for usage."
     },
     {
         inputName: "contributing",
@@ -100,4 +100,4 @@ function init() {
 }
 
 // Function call to initialize app
-//init();
+init();
