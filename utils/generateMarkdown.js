@@ -6,7 +6,7 @@ function renderLicenseBadge(license) {
   }
   // add license badge to top of readme
   return `
-    ${license.badge}
+    ![License](https://img.shields.io/badge/license-${license.spdx_id}-informational)
   `;
 }
 
@@ -18,7 +18,7 @@ function renderLicenseLink(license) {
   }
 
   return `
-  Please refer to ${license.link} for the full terms.
+  Please refer to ${license.url} for the full terms.
   `
 }
 
@@ -31,8 +31,7 @@ function renderLicenseSection(license) {
 
   return `
     ## License
-    ${renderLicenseBadge}
-    This application is licensed under the terms of the ${data.license} open source license.
+    This application is licensed under the terms of ${license.name} open source license.
     ${renderLicenseLink}
   `
 }
@@ -40,6 +39,7 @@ function renderLicenseSection(license) {
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
   return `# ${data.title}
+          ${renderLicenseBadge}
 
           ## Description
           ${data.description}

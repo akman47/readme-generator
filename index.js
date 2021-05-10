@@ -67,35 +67,35 @@ const licenseInfo = () => {
                 response.json().then(data => {
                     let licensePrompt = 
                     {
-                        type: "checkbox",
+                        type: "list",
                         name: "license",
-                        message: "Which license(s) apply to the project?",
+                        message: "Which license applies to the project?",
                         choices: data.map(license => license.name)
                     }
+
+                    var licenseData = data;
                     
                     //console.log(licensePrompt);
                     promptInput.push(licensePrompt);
-                    //console.log(promptInput);
+                    console.log(promptInput);
+
+                    return licenseData;
                 })
             }
         })
 }
 
-//promptInput.push(licensePrompt);
-
-const fileName = data => "./dist/" + data.title + "_README.md"
-
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
     return new Promise((resolve, reject) => {
-        fs.writeFile(fileName, data, err => {
+        fs.writeFile(fileName, generateMarkdown(data), err => {
             if (err) {
                 reject(err);
                 return;
             }
             resolve ({
                 ok: true,
-                message: "New README.md has been created!"
+                message: `New README ${fileName} has been successfully created!`
             });
         });
     });
@@ -111,7 +111,13 @@ function init() {
         `
     );
     // start question prompt
-    return inquirer.prompt (promptInput).then(answers =>(console.log(answers)));
+    return inquirer.prompt(promptInput)
+            .then(answers =>(console.log(answers)));
+
+            // .then(writeToFile(answers.title, answers))
+            // .catch(err => {
+            //     console.log(err);
+            // });
 }
 
 // Function call to initialize app
