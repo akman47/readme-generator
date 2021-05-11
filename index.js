@@ -17,7 +17,7 @@ const questions = [
     },
     { 
         inputName: "title",
-        inputMessage: "What is the title of the project?"
+        inputMessage: "What is the project's name?"
     },
     {
         inputName: "description",
@@ -29,15 +29,15 @@ const questions = [
     },
     {
         inputName: "usage",
-        inputMessage: "Provide instructions and examples for usage."
+        inputMessage: "Provide instructions or commands needed for usage."
     },
     {
         inputName: "contributing",
-        inputMessage: "Provide guidelines to how other developers can contribute to this project."
+        inputMessage: "Provide guidelines for how other developers can contribute to this project."
     },
     {
         inputName: "tests",
-        inputMessage: "Provide tests for the application and examples on how to run them."
+        inputMessage: "Provide instructions on how to run tests."
     }
 ];
 
@@ -107,7 +107,7 @@ function writeToFile(fileName, data) {
             }
             resolve ({
                 ok: true,
-                message: "New " + fileName + " README.md has been successfully created!"
+                message: "New " + fileName + "_README.md has been successfully created!"
             });
         });
     });
@@ -117,9 +117,9 @@ function writeToFile(fileName, data) {
 function init() {
     console.log(
         `
-        ==================================
-         Provide details for a new README
-        ==================================
+        ====================================
+          Provide details for a new README
+        ====================================
         `
     );
     // start question prompt
@@ -129,7 +129,7 @@ function init() {
                 return writeToFile(answers.title, answers);
             })
             .then(writeToFileResponse => {
-                console.log(writeToFileResponse);
+                console.log(writeToFileResponse.message);
             })
             .catch(err => {
                 console.log(err);

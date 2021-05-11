@@ -15,7 +15,7 @@ function renderLicenseLink(license) {
     return "";
   }
 
-  return `https://www.choosealicense.com/licenses/${license}`;
+  return `https://choosealicense.com/licenses/${license.toLowerCase()}`;
 }
 
 // TODO: Create a function that returns the license section of README
@@ -26,7 +26,7 @@ function renderLicenseSection(license) {
   }
 
   return `## License
-This application is licensed under the terms of ${license} open source license. Please refer to ${renderLicenseLink(license)} for the full terms.
+This application is licensed under the terms of ${license} open source license. Please refer to [${license} License](${renderLicenseLink(license)}) for the full terms.
   `;
 }
 
