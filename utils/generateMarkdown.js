@@ -5,9 +5,7 @@ function renderLicenseBadge(license) {
     return "";
   }
   // add license badge to top of readme
-  return `
-    ![License](https://img.shields.io/badge/license-${license.spdx_id}-informational)
-  `;
+  return `![License](https://img.shields.io/badge/license-${license}-informational)`;
 }
 
 // TODO: Create a function that returns the license link
@@ -17,9 +15,7 @@ function renderLicenseLink(license) {
     return "";
   }
 
-  return `
-  Please refer to ${license.url} for the full terms.
-  `
+  return `https://www.choosealicense.com/licenses/${license}`;
 }
 
 // TODO: Create a function that returns the license section of README
@@ -29,46 +25,47 @@ function renderLicenseSection(license) {
     return "";
   }
 
-  return `
-    ## License
-    This application is licensed under the terms of ${license.name} open source license.
-    ${renderLicenseLink}
-  `
+  return `## License
+This application is licensed under the terms of ${license} open source license. Please refer to ${renderLicenseLink(license)} for the full terms.
+  `;
 }
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
   return `# ${data.title}
-          ${renderLicenseBadge}
 
-          ## Description
-          ${data.description}
+${renderLicenseBadge(data.license)}
 
-          ## Table of Contents
-          - [Installation](#installation)
-          - [Usage](#usage)
-          - [License](#license)
-          - [Contributing](#contributing)
-          - [Tests](#tests)
-          - [Questions](#questions)
+## Description
+${data.description}
 
-          ## Installation
-          ${data.installation}
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Contributing](#contributing)
+- [Tests](#tests)
+- [Questions](#questions)
 
-          ## Usage
-          ${data.usage}
+## Installation
+${data.installation}
 
-          ${renderLicenseSection}
+## Usage
+${data.usage}
 
-          ## Contributing
-          ${data.contribution}
+${renderLicenseSection(data.license)}
 
-          ## Tests
-          ${data.tests}
+## Contributing
+${data.contributing}
 
-          ## Questions
-          If you have any questions, email the developer at ${data.email} or visit their [GitHub profile](https://github.com/${data.github})
+## Tests
+${data.tests}
+
+## Questions
+If you have any questions, email the developer at ${data.email} or visit their [GitHub profile](https://github.com/${data.github})
 `;
 }
 
-module.exports = generateMarkdown;
+module.exports = { renderLicenseBadge, renderLicenseSection, generateMarkdown };
+
+

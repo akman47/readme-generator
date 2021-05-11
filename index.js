@@ -2,7 +2,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const fetch = require("node-fetch");
-const generateMarkdown = require("./utils/generateMarkdown.js");
+const { renderLicenseBadge, renderLicenseLink, generateMarkdown } = require("./utils/generateMarkdown.js");
 var licenseData = "";
 
 // TODO: Create an array of questions for user input
@@ -88,19 +88,12 @@ const licenseList = () => {
 }
 
 // get license info
-const getLicenseInfo = userInput => {
+const getLicenseSpdx = userInput => {
     for (let i = 0; i < licenseData.length; i++) {
         if (userInput.license === licenseData[i].name) {
-            // console.log("userInput", userInput.license);
-            // console.log("data.name", licenseData[i].name);
-            
-            let licenseInfo =
-                {
-                    spdx: licenseData[i].spdx_id,
-                }
-            licenseInfo.url = "https://www.choosealicense.com/licenses/" + licenseInfo.spdx + "/"
-            console.log(licenseInfo);
-            break;
+            let licenseId = licenseData[i].spdx_id;
+            userInput.license = licenseId;
+            return userInput;
         }
     }
 }
@@ -108,14 +101,14 @@ const getLicenseInfo = userInput => {
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
     return new Promise((resolve, reject) => {
-        fs.writeFile(fileName, generateMarkdown(data), err => {
+        fs.writeFile(fileName + "_README.md", generateMarkdown(data), err => {
             if (err) {
                 reject(err);
                 return;
             }
             resolve ({
                 ok: true,
-                message: `New README ${fileName} has been successfully created!`
+                message: "New " + fileName + " README.md has been successfully created!"
             });
         });
     });
@@ -133,15 +126,13 @@ function init() {
     // start question prompt
     return inquirer.prompt(promptInput)
             .then(answers => {
-                getLicenseInfo(answers);
+                getLicenseSpdx(answers);
+                return writeToFile(answers.title, answers);
                 //console.log(answers);
+            })
+            .catch(err => {
+                console.log(err);
             });
-        
-
-            // .then(writeToFile(answers.title, answers))
-            // .catch(err => {
-            //     console.log(err);
-            // });
 }
 
 // Function call to initialize app
