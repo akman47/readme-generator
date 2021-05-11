@@ -2,7 +2,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const fetch = require("node-fetch");
-const { renderLicenseBadge, renderLicenseLink, generateMarkdown } = require("./utils/generateMarkdown.js");
+const generateMarkdown = require("./utils/generateMarkdown.js");
 var licenseData = "";
 
 // TODO: Create an array of questions for user input
@@ -58,7 +58,7 @@ var promptInput = questions.map( field => {
         }
     });
 
-// gather license information
+// gather all license types for list choices
 const licenseList = () => {
     var apiUrl = "https://api.github.com/licenses";
 
@@ -77,9 +77,8 @@ const licenseList = () => {
                     // save license data to access later
                     licenseData = data;
             
-                    // add license to input array
+                    // add license prompt to inputPrompt array
                     promptInput.push(licensePrompt);
-                    //console.log(licenseData);
 
                     init();
                 })
@@ -87,7 +86,7 @@ const licenseList = () => {
         })
 }
 
-// get license info
+// get license spdx id to render license badge and url
 const getLicenseSpdx = userInput => {
     for (let i = 0; i < licenseData.length; i++) {
         if (userInput.license === licenseData[i].name) {
@@ -128,7 +127,9 @@ function init() {
             .then(answers => {
                 getLicenseSpdx(answers);
                 return writeToFile(answers.title, answers);
-                //console.log(answers);
+            })
+            .then(writeToFileResponse => {
+                console.log(writeToFileResponse);
             })
             .catch(err => {
                 console.log(err);
@@ -138,4 +139,3 @@ function init() {
 // Function call to initialize app
 licenseList();
 //init();
-
