@@ -8,55 +8,102 @@ var licenseData = "";
 // TODO: Create an array of questions for user input
 const questions = [ 
     {
-        inputName: "github",
-        inputMessage: " What is your GitHub username?"
-    },
-    {
-        inputName: "email",
-        inputMessage: "What is your email address?"
-    },
-    { 
-        inputName: "title",
-        inputMessage: "What is the project's name?"
-    },
-    {
-        inputName: "description",
-        inputMessage: "Provide a description of the project."
-    },
-    {
-        inputName: "installation",
-        inputMessage: "Provide the steps required to install the project."
-    },
-    {
-        inputName: "usage",
-        inputMessage: "Provide instructions or commands needed for usage."
-    },
-    {
-        inputName: "contributing",
-        inputMessage: "Provide guidelines for how other developers can contribute to this project."
-    },
-    {
-        inputName: "tests",
-        inputMessage: "Provide instructions on how to run tests."
-    }
-];
-
-var promptInput = questions.map( field => {
-    return {
-            type: "input",
-            name: field.inputName,
-            message: field.inputMessage,
-            validate: input => {
-                if (input) {
-                    return true;
-                }
-                else {
-                    console.log("Please enter " + inputName + "information about the project!");
-                    return false;
-                }
+        type: "input",
+        name: "github",
+        message: "What is your GitHub username?",
+        validate: input => {
+            if (input) {
+                return true;
+            }
+            else {
+                console.log("Please enter your GitHub username.");
+                return false;
             }
         }
-    });
+    },
+    {
+        type: "input",
+        name: "email",
+        message: "What is your email address?",
+        validate: input => {
+            if (input) {
+                return true;
+            }
+            else {
+                console.log("Please enter your email address.");
+                return false;
+            }
+        }
+    },
+    { 
+        type: "input",
+        name: "title",
+        message: "What is your project's name?",
+        validate: input => {
+            if (input) {
+                return true;
+            }
+            else {
+                console.log("Please provide the project's title.");
+                return false;
+            }
+        }
+    },
+    {
+        type: "input",
+        name: "description",
+        message: "Provide a description of the project.",
+        validate: input => {
+            if (input) {
+                return true;
+            }
+            else {
+                console.log("Please enter a short description about the project.");
+                return false;
+            }
+        }
+    },
+    {
+        type: "input",
+        name: "installation",
+        message: "What command should be run to install dependencies?",
+        default: "npm i"
+    },
+    {
+        type: "input",
+        name: "tests",
+        message: "What command should be run to run tests?",
+        default: "npm test"
+    },
+    {
+        type: "input",
+        name: "usage",
+        message: "What does the user neeed to know about using the repo?",
+        validate: input => {
+            if (input) {
+                return true;
+            }
+            else {
+                console.log("Please enter usage information about the project.");
+                return false;
+            }
+        }
+    },
+    {
+        type: "input",
+        name: "contributing",
+        message: "Provide guidelines for how other developers can contribute to this project.",
+        validate: input => {
+            if (input) {
+                return true;
+            }
+            else {
+                console.log("Please enter contributing information about the project.");
+                return false;
+            }
+        }
+    }
+];
 
 // gather all license types for list choices
 const licenseList = () => {
@@ -78,7 +125,7 @@ const licenseList = () => {
                     licenseData = data;
             
                     // add license prompt to inputPrompt array
-                    promptInput.push(licensePrompt);
+                    questions.push(licensePrompt);
 
                     init();
                 })
@@ -123,7 +170,7 @@ function init() {
         `
     );
     // start question prompt
-    return inquirer.prompt(promptInput)
+    return inquirer.prompt(questions)
             .then(answers => {
                 getLicenseSpdx(answers);
                 return writeToFile(answers.title, answers);

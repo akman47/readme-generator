@@ -67,5 +67,3 @@ If you have any questions, email the developer at ${data.email} or visit their [
 }
 
 module.exports = generateMarkdown;
-
-
