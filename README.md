@@ -26,7 +26,7 @@ As a developer, I want a README generator so that I can quickly create a profess
 
 ## Screen Recording
 ![Screen recording of how to use the application](./assets/images/readme-generator-demo.gif)
-* Walkthrough Link: 
+* [Walkthrough Link](https://drive.google.com/file/d/1tvzBWIoYj48riIXYsya99uX4pF3lbWiD/view)
 
 ## Usage
 1. Clone readme generator repository

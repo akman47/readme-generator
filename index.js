@@ -78,7 +78,7 @@ const questions = [
     {
         type: "input",
         name: "usage",
-        message: "What does the user neeed to know about using the repo?",
+        message: "What does the user need to know about using the repo?",
         validate: input => {
             if (input) {
                 return true;
