@@ -22,7 +22,7 @@ As a developer, I want a README generator so that I can quickly create a profess
 
 ## Snapshot
 ![Snapshot of the terminal prompts for user input](./assets/images/command-prompts.png)
-![Snapshot of generated README.md](./assets/images/generated-readme.png)
+![Snapshot of generated README.md](./assets/images/generated-readme.gif)
 
 ## Screen Recording
 ![Screen recording of how to use the application](./assets/images/readme-generator-demo.gif)
